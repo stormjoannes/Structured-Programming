@@ -4,3 +4,7 @@ n = int(input('geef de bitwaarde: '))
 
 def verschuiven(ch, n):
     if n < 0:
+        return ch[n:] + ch[:n]
+    else:
+        return ch[n:] + ch[:n]
+print(verschuiven(ch, n))
