@@ -1,7 +1,18 @@
-alfabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+alfabet = 'abcdefghijklmnopqrstuvwxyz'
 x = input('geef een tekst: ')
-y = int(input('geef een rotatie'))
+y = int(input('geef een rotatie: '))
+s = ''
 for i in x:
-    for z in range(0, len(alfabet) - 1):
-        if alfabet[z] == i:
-            
+    if i not in alfabet:
+        s += i
+    else:
+        for z in range(0, len(alfabet)):
+            if alfabet[z] == i:
+                samen = z + y
+                if samen > len(alfabet):
+                    over = samen - len(alfabet)
+                    s += alfabet[over]
+                else:
+                    s += alfabet[samen]
+print(s)
+
