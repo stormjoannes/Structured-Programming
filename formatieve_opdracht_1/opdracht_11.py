@@ -9,7 +9,7 @@ for i in x:
         for z in range(0, len(alfabet)):
             if alfabet[z] == i:
                 samen = z + y
-                if samen > len(alfabet):
+                if samen > len(alfabet) - 1:
                     over = samen - len(alfabet)
                     s += alfabet[over]
                 else:
