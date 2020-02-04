@@ -5,5 +5,4 @@ print(user)
 file = open("nieuw_bestand.txt", 'w')
 for i in user:
     if i != '\n':
-        i.strip()
-        file.write(i)
+        file.write((i.strip() + '\n'))
