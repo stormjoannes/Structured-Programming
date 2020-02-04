@@ -1,4 +1,4 @@
-#ik zag het nut van opdr 4 om een built in function te gebruiken niet maar ik dacht ik gebruik reverse wel op een rare manier.
+#ik zag het nut van opdr 4 om een built in function te gebruiken niet in maar ik dacht ik gebruik reverse wel op een rare manier.
 def palindroome():
     x = input('geef een woord: ')
     lst = []

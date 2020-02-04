@@ -4,6 +4,8 @@ def count(x, lst):
     if x in lst:
         y = (lst.count(x))
         return y
+    else:
+        return 0
 print('Count: ' + str(count(x, lst)))
 
 print('')
@@ -28,7 +30,7 @@ print('')
 list = [1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
 def voldoen():
     if (count(1, list) > count(0, list)) and count(0, list) <= 12:
-        return 'akkoord'
+        return 'voldoet wel'
     else:
-        return 'niet akkoord'
+        return 'voldoet niet'
 print(voldoen())
