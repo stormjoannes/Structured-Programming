@@ -10,7 +10,7 @@ print(palindroome())
 print('')
 
 def palindroom():
-    x = input('Type een woord: ')
+    x = input('geef een woord: ')
     a = x[::-1]
     if a == x:
         return 'Wel een palindroom'
