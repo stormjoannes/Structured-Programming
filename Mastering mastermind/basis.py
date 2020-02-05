@@ -6,28 +6,28 @@ code = []
 
 def gamemode():
     pogingen = 1
-    modus = input('Wil je de Code maken of Code breken, voor de spelregels type regels: ').lower()
-    if 'breken' in modus:
-        code_breken(pogingen, code)
-    elif 'maken' in modus:
-        code_maken()
-    elif 'regels' in modus:
+    gespeeld = input('Heb je dit spel aal een keer gespeeld [Y/N]: ').lower()
+    if 'n' in gespeeld:
         spelregels = 'Er zijn 4 verschillen kleuren pionnen waar je uit kunt kiezen: blauw, Wit, rood en zwart' + \
                      '\n' + \
                      'Je hebt 10 beurten om het goed te raden' + '\n'
         print(spelregels)
-        gamemode()
+    modus = input('Wil je de Code maken of breken: ').lower()
+    if 'breken' in modus:
+        code_breken(pogingen, code)
+    elif 'maken' in modus:
+        code_maken()
     else:
         print('dat is geen bestaande gamemode')
         gamemode()
 
 
-def code_breken(pogingen, code):
+def code_breken(pogingen, codes):
     pionnen = []
     feedback = []
-    while len(code) != 4:
-        code.append(random.choice(kegels))
-    print(code)
+    while len(codes) != 4:
+        codes.append(random.choice(kegels))
+    print(codes)
 
     print('Je hebt nog ' + str(11 - pogingen) + ' pogingen over.')
 
@@ -59,15 +59,15 @@ def code_breken(pogingen, code):
         pion4 = input('welke kleur heeft pion 4: ')
     pionnen.append(pion4)
 
-    if pionnen == code:
+    if pionnen == codes:
         print('Gefeliciteerd je hebt het goed geraden')
-        print('Je hebt het in ' + str(pogingen) + ' poging gehaald.')
+        print('Je hebt het in ' + str(pogingen) + ' poging gehaald.' + '\n')
         gamemode()
     else:
         for i in range(0, len(pionnen)):
-            if pionnen[i] == code[i]:
+            if pionnen[i] == codes[i]:
                 feedback.append('zwarte pin')
-            elif pionnen[i] in code:
+            elif pionnen[i] in codes:
                 feedback.append('witte pin')
             else:
                 feedback.append('geen kegel')
@@ -78,7 +78,7 @@ def code_breken(pogingen, code):
             print('Helaas je hebt de code niet kunnen kraken in 10 pogingen' + '\n')
             gamemode()
         else:
-            code_breken(pogingen, code)
+            code_breken(pogingen, codes)
 
 
 def code_maken():
