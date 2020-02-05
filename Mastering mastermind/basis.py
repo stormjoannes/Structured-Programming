@@ -1,8 +1,8 @@
 import random
+
 kegels = ['rood', 'blauw', 'wit', 'zwart']
 code = []
-while len(code) != 4:
-    code.append(random.choice(kegels))
+
 
 def gamemode():
     pogingen = 1
@@ -21,9 +21,12 @@ def gamemode():
         print('dat is geen bestaande gamemode')
         gamemode()
 
+
 def code_breken(pogingen, code):
     pionnen = []
     feedback = []
+    while len(code) != 4:
+        code.append(random.choice(kegels))
     print(code)
 
     print('Je hebt nog ' + str(11 - pogingen) + ' pogingen over.')
@@ -32,28 +35,28 @@ def code_breken(pogingen, code):
     pion1 = pion1.strip()
     while pion1 not in kegels:
         print('Deze kleur pion bestaat niet, probeer het opnieuw.')
-        pion1 = input('welke kleur heeft pion1: ')
+        pion1 = input('welke kleur heeft pion 1: ')
     pionnen.append(pion1)
 
     pion2 = input('welke kleur heeft pion 2: ')
     pion2 = pion2.strip()
     while pion2 not in kegels:
         print('Deze kleur pion bestaat niet, probeer het opnieuw.')
-        pion2 = input('welke kleur heeft pion2: ')
+        pion2 = input('welke kleur heeft pion 2: ')
     pionnen.append(pion2)
 
     pion3 = input('welke kleur heeft pion 3: ')
     pion3 = pion3.strip()
     while pion3 not in kegels:
         print('Deze kleur pion bestaat niet, probeer het opnieuw.')
-        pion3 = input('welke kleur heeft pion3: ')
+        pion3 = input('welke kleur heeft pion 3: ')
     pionnen.append(pion3)
 
     pion4 = input('welke kleur heeft pion 4: ')
     pion4 = pion4.strip()
     while pion4 not in kegels:
         print('Deze kleur pion bestaat niet, probeer het opnieuw.')
-        pion4 = input('welke kleur heeft pion4: ')
+        pion4 = input('welke kleur heeft pion 4: ')
     pionnen.append(pion4)
 
     if pionnen == code:
@@ -76,5 +79,42 @@ def code_breken(pogingen, code):
             gamemode()
         else:
             code_breken(pogingen, code)
+
+
+def code_maken():
+    eigencode = []
+    randcode = []
+    pion1 = input('kies een kleur voor pion 1: ')
+    pion1 = pion1.strip()
+    while pion1 not in kegels:
+        print('Deze kleur pion bestaat niet, probeer het opnieuw.')
+        pion1 = input('kies een kleur voor pion 1: ')
+    eigencode.append(pion1)
+
+    pion2 = input('kies een kleur voor pion 2: ')
+    pion2 = pion2.strip()
+    while pion2 not in kegels:
+        print('Deze kleur pion bestaat niet, probeer het opnieuw.')
+        pion2 = input('kies een kleur voor pion 2: ')
+    eigencode.append(pion2)
+
+    pion3 = input('kies een kleur voor pion 3: ')
+    pion3 = pion3.strip()
+    while pion3 not in kegels:
+        print('Deze kleur pion bestaat niet, probeer het opnieuw.')
+        pion3 = input('kies een kleur voor pion 2: ')
+    eigencode.append(pion3)
+
+    pion4 = input('kies een kleur voor pion 2: ')
+    pion4 = pion4.strip()
+    while pion4 not in kegels:
+        print('Deze kleur pion bestaat niet, probeer het opnieuw.')
+        pion4 = input('kies een kleur voor pion 2: ')
+    eigencode.append(pion4)
+    print(eigencode)
+    while len(randcode) != 4:
+        randcode.append(random.choice(kegels))
+    print(randcode)
+
 
 gamemode()
