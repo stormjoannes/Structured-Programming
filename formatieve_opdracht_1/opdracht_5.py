@@ -9,7 +9,6 @@ def sort(lst):
     return lst
 print(sort(lst))
 
-
 def asort(lst):
     nlst = []
     while (len(lst) != 0):

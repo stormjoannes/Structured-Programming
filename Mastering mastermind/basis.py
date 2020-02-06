@@ -1,19 +1,20 @@
 import random
 
-kegels = ['rood', 'blauw', 'wit', 'zwart']
+kegels = ['rood', 'blauw', 'wit', 'zwart', 'geel', 'groen']
 code = []
 gespeeld = input('Heb je dit spel al een keer gespeeld [Y/N]: ').lower()
 
 if 'n' == gespeeld:
     spelregels = '---SPELREGELS---' + \
                  '\n' + \
-                 'Er zijn 4 verschillen kleuren pionnen waar je uit kunt kiezen: blauw, Wit, rood en zwart.' + \
+                 'Er zijn 6 verschillen kleuren pionnen waar je uit kunt kiezen: blauw, Wit, rood en zwart.' + \
                  '\n' + \
                  'Je hebt 10 beurten om het goed te raden, haal je ndit niet heb je verloren.' + \
                  '\n' + \
                  'Zodra een pion op de goede plek staat en de goede kleur is komt er een zwart pinnetje te staan.' + \
                  '\n' + \
-                 'Zodra een pion niet op de goede plek staat, maar de kleur wel in de code voorkomt. Krijg je een wit pinnejte erbij.' + \
+                 'Zodra een pion niet op de goede plek staat, maar de kleur wel in de code voorkomt.' + \
+                 'Krijg je een wit pinnejte erbij.' + \
                  '\n' + \
                  'Als je de code hebt geraden heb je gewonnen.' + \
                  '\n' + \
@@ -41,7 +42,7 @@ def code_breken(pogingen, codes):
     feedback = []
     while len(codes) != 4:
         codes.append(random.choice(kegels))
-    # print(codes)
+    print(codes)
 
     print('Je hebt nog ' + str(11 - pogingen) + ' pogingen over.')
 
@@ -127,6 +128,7 @@ def code_maken(pogingen):
     eigencode.append(pion4)
     print(eigencode)
     pc_raden(pogingen, eigencode)
+
 
 def pc_raden(pogingen, eigencode):
     randcode = []
