@@ -2,7 +2,7 @@ import random
 
 kegels = ['rood', 'blauw', 'wit', 'zwart']
 code = []
-gespeeld = input('Heb je dit spel aal een keer gespeeld [Y/N]: ').lower()
+gespeeld = input('Heb je dit spel al een keer gespeeld [Y/N]: ').lower()
 
 if 'n' == gespeeld:
     spelregels = '---SPELREGELS---' + \
