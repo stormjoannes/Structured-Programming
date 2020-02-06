@@ -5,6 +5,7 @@ ketels = ['rood', 'blauw', 'wit', 'zwart', 'geel', 'groen']
 code = []
 gespeeld = input('Heb je dit spel al een keer gespeeld [Y/N]: ').lower()
 index = 0
+hvl = 0
 
 if 'n' == gespeeld:
     spelregels = '---SPELREGELS---' + \
@@ -44,7 +45,6 @@ def code_breken(pogingen, codes):
     feedback = []
     while len(codes) != 4:
         codes.append(random.choice(kegels))
-    print(codes)
 
     print('Je hebt nog ' + str(11 - pogingen) + ' pogingen over.')
 
@@ -128,14 +128,14 @@ def code_maken(pogingen):
         print('Deze kleur pion bestaat niet, probeer het opnieuw.')
         pion4 = input('kies een kleur voor pion 4: ')
     eigencode.append(pion4)
-    pc_raden(pogingen, eigencode, index, ketels)
+    pc_raden(pogingen, eigencode, index, ketels, hvl)
 
 
-def pc_raden(pogingen, eigencode, index, ketels):
+def pc_raden(pogingen, eigencode, index, ketels, hvl):
     randcode = []
     terug = []
 
-    if index <= 5:
+    if hvl <= 5:
         while len(randcode) != 4:
             randcode.append(ketels[index])
 
@@ -157,13 +157,15 @@ def pc_raden(pogingen, eigencode, index, ketels):
         if terug[0] == 'geen kegel' and terug[1] == 'geen kegel' and terug[2] == 'geen kegel' and terug[3] == 'geen kegel':
             ketels.remove(ketels[index])
             print(ketels)
-            pc_raden(pogingen, eigencode, index, ketels)
+            hvl += 1
+            pc_raden(pogingen, eigencode, index, ketels, hvl)
         else:
             index += 1
             print(ketels)
-            pc_raden(pogingen, eigencode, index, ketels)
+            hvl += 1
+            pc_raden(pogingen, eigencode, index, ketels, hvl)
     else:
-        print('klaa')
+        print('klaar')
 
 
 
