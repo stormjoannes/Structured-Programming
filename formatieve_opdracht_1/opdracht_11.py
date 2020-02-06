@@ -11,8 +11,9 @@ for i in x:
                 samen = z + y
                 if samen > len(alfabet) - 1:
                     over = samen - len(alfabet)
+                    while over > 26:
+                        over -= 26
                     s += alfabet[over]
                 else:
                     s += alfabet[samen]
 print(s)
-

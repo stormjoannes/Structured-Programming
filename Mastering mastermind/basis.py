@@ -3,6 +3,7 @@ import random
 kegels = ['rood', 'blauw', 'wit', 'zwart', 'geel', 'groen']
 code = []
 gespeeld = input('Heb je dit spel al een keer gespeeld [Y/N]: ').lower()
+index = 0
 
 if 'n' == gespeeld:
     spelregels = '---SPELREGELS---' + \
@@ -127,20 +128,67 @@ def code_maken(pogingen):
         pion4 = input('kies een kleur voor pion 2: ')
     eigencode.append(pion4)
     print(eigencode)
-    pc_raden(pogingen, eigencode)
+    pc_raden(pogingen, eigencode, index)
 
 
-def pc_raden(pogingen, eigencode):
+def pc_raden(pogingen, eigencode, index):
     randcode = []
+    terug = []
     while len(randcode) != 4:
-        randcode.append(random.choice(kegels))
-    print('De computer raadde: ' + str(randcode))
+        randcode.append(kegels[index])
+
     if randcode == eigencode:
-        print('Helaas de computer heeft het geraden in ' + str(pogingen) + ' pogingen.' + '\n')
+        print('Helaas, de computer heeft het goed geraden')
         gamemode()
-    else:
-        pogingen += 1
-        pc_raden(pogingen, eigencode)
+
+    for i in range(0, len(randcode)):
+        if randcode[i] == eigencode[i]:
+            terug.append('zwarte pin')
+        elif randcode[i] in eigencode:
+            terug.append('witte pin')
+        else:
+            terug.append('geen kegel')
+    print(terug)
+    print(index)
+    random.shuffle(terug)
+    if terug[0] == 'geen kegel' and terug[1] == 'geen kegel' and terug[2] == 'geen kegel' and terug[3] == 'geen kegel':
+        index += 1
+        pc_raden(pogingen, eigencode, index)
+    pc_raden(pogingen, eigencode, index)
+
+
+
+
+
+
+
+
+
+
+
+
+    #
+    # if pionnen == codes:
+    #     print('Gefeliciteerd je hebt het goed geraden')
+    #     print('Je hebt het in ' + str(pogingen) + ' poging gehaald.' + '\n')
+    #     gamemode()
+    # else:
+    #     for i in range(0, len(pionnen)):
+    #         if pionnen[i] == codes[i]:
+    #             feedback.append('zwarte pin')
+    #         elif pionnen[i] in codes:
+    #             feedback.append('witte pin')
+    #         else:
+    #             feedback.append('geen kegel')
+    #     random.shuffle(feedback)
+    #     print(feedback)
+    #     pogingen += 1
+    #     if pogingen == 11:
+    #         print('Helaas je hebt de code niet kunnen kraken in 10 pogingen' + '\n')
+    #         print('De code was ' + str(code))
+    #         gamemode()
+    #     else:
+    #         code_breken(pogingen, codes)
 
 
 gamemode()
