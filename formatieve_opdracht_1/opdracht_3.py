@@ -11,7 +11,7 @@ print('Count: ' + str(count(x, lst)))
 print('')
 def verschil():
     x = 0
-    for i in range (0, len(lst) - 1):
+    for i in range(0, len(lst) - 1):
         if lst[i] > lst[i + 1]:
             grootste = lst[i]
             kleinste = lst[i + 1]

@@ -24,8 +24,6 @@ elif 'y' == gespeeld:
     print('\n')
 
 
-
-
 def gamemode():
     pogingen = 1
     modus = input('Wil je de Code maken of breken: ').lower()
