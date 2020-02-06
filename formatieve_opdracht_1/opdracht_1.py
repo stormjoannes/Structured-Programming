@@ -7,7 +7,6 @@ for x in range (1, k):
 
 print ('')
 
-
 ka = 0
 while ka != 5:
     ka += 1
