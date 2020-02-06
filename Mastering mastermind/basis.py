@@ -3,6 +3,7 @@ import random
 kegels = ['rood', 'blauw', 'wit', 'zwart', 'geel', 'groen']
 ketels = ['rood', 'blauw', 'wit', 'zwart', 'geel', 'groen']
 code = []
+set = []
 gespeeld = input('Heb je dit spel al een keer gespeeld [Y/N]: ').lower()
 index = 0
 hvl = 0
@@ -34,7 +35,7 @@ def gamemode():
     if 'breken' in modus:
         code_breken(pogingen, code)
     elif 'maken' in modus:
-        code_maken(pogingen)
+        code_maken(pogingen, set)
     else:
         print('dat is geen bestaande gamemode, probeer het opnieuw')
         gamemode()
@@ -96,10 +97,11 @@ def code_breken(pogingen, codes):
             print('De code was ' + str(code))
             gamemode()
         else:
+            set.append(pionnen)
             code_breken(pogingen, codes)
 
 
-def code_maken(pogingen):
+def code_maken(pogingen, set):
     eigencode = []
     pion1 = input('kies een kleur voor pion 1: ')
     pion1 = pion1.strip()
@@ -128,10 +130,10 @@ def code_maken(pogingen):
         print('Deze kleur pion bestaat niet, probeer het opnieuw.')
         pion4 = input('kies een kleur voor pion 4: ')
     eigencode.append(pion4)
-    pc_raden(pogingen, eigencode, index, ketels, hvl)
+    pc_raden(pogingen, eigencode, index, ketels, hvl, set)
 
 
-def pc_raden(pogingen, eigencode, index, ketels, hvl):
+def pc_raden(pogingen, eigencode, index, ketels, hvl, set):
     randcode = []
     terug = []
 
@@ -140,7 +142,7 @@ def pc_raden(pogingen, eigencode, index, ketels, hvl):
             randcode.append(ketels[index])
 
         if randcode == eigencode:
-            print('Helaas, de computer heeft het goed geraden')
+            print('Helaas, de computer heeft het goed geraden in ' + str(pogingen) + ' pogingen.')
             gamemode()
 
         for i in range(0, len(randcode)):
@@ -154,18 +156,61 @@ def pc_raden(pogingen, eigencode, index, ketels, hvl):
         print(index)
         random.shuffle(terug)
         print(ketels)
+        set.append(randcode)
         if terug[0] == 'geen kegel' and terug[1] == 'geen kegel' and terug[2] == 'geen kegel' and terug[3] == 'geen kegel':
             ketels.remove(ketels[index])
             print(ketels)
             hvl += 1
-            pc_raden(pogingen, eigencode, index, ketels, hvl)
+            pogingen += 1
+            pc_raden(pogingen, eigencode, index, ketels, hvl, set)
         else:
             index += 1
             print(ketels)
             hvl += 1
-            pc_raden(pogingen, eigencode, index, ketels, hvl)
+            pogingen += 1
+            pc_raden(pogingen, eigencode, index, ketels, hvl, set)
     else:
-        print('klaar')
+        combo = []
+        combo = ketels
+        print(eigencode)
+        if len(ketels) == 4:
+            while combo != eigencode:
+                print('1e')
+                print(combo)
+                random.shuffle(combo)
+                print(combo)
+                pogingen += 1
+            print('de computer heeft het geraden in ')
+            print(eigencode)
+            print('Aantal pogingen gedaan: ' + str(pogingen) + '\n')
+            gamemode()
+        else:
+            lager(combo, eigencode, pogingen, set)
+
+def lager(combo, eigencode, pogingen, set):
+    print(combo)
+    print(pogingen)
+    if len(combo) < 4:
+        combo.append(random.choice(combo))
+        random.shuffle(combo)
+        print('geshuffeld')
+        print(combo)
+        lager(combo, eigencode, pogingen, set)
+    else:
+        pogingen += 1
+        if combo in set:
+            print('gecancelled')
+            combo = list(dict.fromkeys(combo))
+            lager(combo, eigencode, pogingen, set)
+
+        if combo == eigencode:
+            print('helaas het is geraden in ' + str(pogingen) + ' pogingen' + '\n')
+            gamemode()
+        else:
+            set.append(combo)
+            combo = list(dict.fromkeys(combo))
+            print('combo hertsteld')
+            lager(combo, eigencode, pogingen, set)
 
 
 
