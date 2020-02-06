@@ -1,6 +1,7 @@
 import random
 
 kegels = ['rood', 'blauw', 'wit', 'zwart', 'geel', 'groen']
+ketels = ['rood', 'blauw', 'wit', 'zwart', 'geel', 'groen']
 code = []
 gespeeld = input('Heb je dit spel al een keer gespeeld [Y/N]: ').lower()
 index = 0
@@ -118,43 +119,51 @@ def code_maken(pogingen):
     pion3 = pion3.strip()
     while pion3 not in kegels:
         print('Deze kleur pion bestaat niet, probeer het opnieuw.')
-        pion3 = input('kies een kleur voor pion 2: ')
+        pion3 = input('kies een kleur voor pion 3: ')
     eigencode.append(pion3)
 
-    pion4 = input('kies een kleur voor pion 2: ')
+    pion4 = input('kies een kleur voor pion 4: ')
     pion4 = pion4.strip()
     while pion4 not in kegels:
         print('Deze kleur pion bestaat niet, probeer het opnieuw.')
-        pion4 = input('kies een kleur voor pion 2: ')
+        pion4 = input('kies een kleur voor pion 4: ')
     eigencode.append(pion4)
-    print(eigencode)
-    pc_raden(pogingen, eigencode, index)
+    pc_raden(pogingen, eigencode, index, ketels)
 
 
-def pc_raden(pogingen, eigencode, index):
+def pc_raden(pogingen, eigencode, index, ketels):
     randcode = []
     terug = []
-    while len(randcode) != 4:
-        randcode.append(kegels[index])
 
-    if randcode == eigencode:
-        print('Helaas, de computer heeft het goed geraden')
-        gamemode()
+    if index <= 5:
+        while len(randcode) != 4:
+            randcode.append(ketels[index])
 
-    for i in range(0, len(randcode)):
-        if randcode[i] == eigencode[i]:
-            terug.append('zwarte pin')
-        elif randcode[i] in eigencode:
-            terug.append('witte pin')
+        if randcode == eigencode:
+            print('Helaas, de computer heeft het goed geraden')
+            gamemode()
+
+        for i in range(0, len(randcode)):
+            if randcode[i] == eigencode[i]:
+                terug.append('zwarte pin')
+            elif randcode[i] in eigencode:
+                terug.append('witte pin')
+            else:
+                terug.append('geen kegel')
+        print(terug)
+        print(index)
+        random.shuffle(terug)
+        print(ketels)
+        if terug[0] == 'geen kegel' and terug[1] == 'geen kegel' and terug[2] == 'geen kegel' and terug[3] == 'geen kegel':
+            ketels.remove(ketels[index])
+            print(ketels)
+            pc_raden(pogingen, eigencode, index, ketels)
         else:
-            terug.append('geen kegel')
-    print(terug)
-    print(index)
-    random.shuffle(terug)
-    if terug[0] == 'geen kegel' and terug[1] == 'geen kegel' and terug[2] == 'geen kegel' and terug[3] == 'geen kegel':
-        index += 1
-        pc_raden(pogingen, eigencode, index)
-    pc_raden(pogingen, eigencode, index)
+            index += 1
+            print(ketels)
+            pc_raden(pogingen, eigencode, index, ketels)
+    else:
+        print('doei')
 
 
 
