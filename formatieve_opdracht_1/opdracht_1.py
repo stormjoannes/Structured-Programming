@@ -17,7 +17,6 @@ while j != 0:
     j -= 1
     print(j * '*')
 
-
 ko = 0
 b = k
 while b != 0:
