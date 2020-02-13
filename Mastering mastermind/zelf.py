@@ -2,13 +2,13 @@ import random
 
 kegels = ['rood', 'blauw', 'wit', 'zwart', 'geel', 'groen']
 random.shuffle(kegels)
+
 code = []
 set = []
-gespeeld = input('Heb je dit spel al een keer gespeeld [Y/N]: ').lower()
 index = 0
-hvl = 0
 voorkomen = {}
 
+gespeeld = input('Heb je dit spel al een keer gespeeld [Y/N]: ').lower()
 if 'n' == gespeeld:
     spelregels = '---SPELREGELS---' + \
                  '\n' + \
@@ -35,6 +35,7 @@ def gamemode():
     pogingen = 1
     modus = input('Wil je de Code maken of breken: ').lower()
     if 'breken' in modus:
+        print('De te raden kleuren zijn: ' + '\n' + str(kegels))
         code_breken(pogingen, code)
     elif 'maken' in modus:
         code_maken(pogingen, set)
@@ -44,7 +45,6 @@ def gamemode():
 
 
 def code_breken(pogingen, codes):
-    print('De te raden kleuren zijn: ' + '\n' + str(kegels))
     pionnen = []
     feedback = []
     while len(codes) != 4:
@@ -52,33 +52,14 @@ def code_breken(pogingen, codes):
 
     print('Je hebt nog ' + str(11 - pogingen) + ' pogingen over.')
 
-    pion1 = input('welke kleur heeft pion 1: ')
-    pion1 = pion1.strip()
-    while pion1 not in kegels:
-        print('Deze kleur pion bestaat niet, probeer het opnieuw.')
-        pion1 = input('welke kleur heeft pion 1: ')
-    pionnen.append(pion1)
-
-    pion2 = input('welke kleur heeft pion 2: ')
-    pion2 = pion2.strip()
-    while pion2 not in kegels:
-        print('Deze kleur pion bestaat niet, probeer het opnieuw.')
-        pion2 = input('welke kleur heeft pion 2: ')
-    pionnen.append(pion2)
-
-    pion3 = input('welke kleur heeft pion 3: ')
-    pion3 = pion3.strip()
-    while pion3 not in kegels:
-        print('Deze kleur pion bestaat niet, probeer het opnieuw.')
-        pion3 = input('welke kleur heeft pion 3: ')
-    pionnen.append(pion3)
-
-    pion4 = input('welke kleur heeft pion 4: ')
-    pion4 = pion4.strip()
-    while pion4 not in kegels:
-        print('Deze kleur pion bestaat niet, probeer het opnieuw.')
-        pion4 = input('welke kleur heeft pion 4: ')
-    pionnen.append(pion4)
+    for i in range(1, 5):
+        pion = ''
+        while pion not in kegels:
+            pion = input('welke kleur heeft pion ' + str(i) + ': ')
+            pion = pion.strip()
+            if pion not in kegels:
+                print('Deze kleur pion bestaat niet, probeer het opnieuw.')
+        pionnen.append(pion)
 
     if pionnen == codes:
         print('Gefeliciteerd je hebt het goed geraden')
@@ -104,51 +85,33 @@ def code_breken(pogingen, codes):
             code_breken(pogingen, codes)
 
 
-
 def code_maken(pogingen, set):
     set.clear()
     eigencode = []
-    pion1 = input('kies een kleur voor pion 1: ')
-    pion1 = pion1.strip()
-    while pion1 not in kegels:
-        print('Deze kleur pion bestaat niet, probeer het opnieuw.')
-        pion1 = input('kies een kleur voor pion 1: ')
-    eigencode.append(pion1)
 
-    pion2 = input('kies een kleur voor pion 2: ')
-    pion2 = pion2.strip()
-    while pion2 not in kegels:
-        print('Deze kleur pion bestaat niet, probeer het opnieuw.')
-        pion2 = input('kies een kleur voor pion 2: ')
-    eigencode.append(pion2)
-
-    pion3 = input('kies een kleur voor pion 3: ')
-    pion3 = pion3.strip()
-    while pion3 not in kegels:
-        print('Deze kleur pion bestaat niet, probeer het opnieuw.')
-        pion3 = input('kies een kleur voor pion 3: ')
-    eigencode.append(pion3)
-
-    pion4 = input('kies een kleur voor pion 4: ')
-    pion4 = pion4.strip()
-    while pion4 not in kegels:
-        print('Deze kleur pion bestaat niet, probeer het opnieuw.')
-        pion4 = input('kies een kleur voor pion 4: ')
-    eigencode.append(pion4)
-    pc_raden(pogingen, eigencode, index, hvl, set, voorkomen)
+    for i in range(1, 5):
+        pion = ''
+        while pion not in kegels:
+            pion = input('kies een kleur voor pion ' + str(i) + ': ')
+            pion = pion.strip()
+            if pion not in kegels:
+                print('Deze kleur pion bestaat niet, probeer het opnieuw.')
+        eigencode.append(pion)
+    pc_raden(pogingen, eigencode, index, set, voorkomen)
 
 
-def pc_raden(pogingen, eigencode, index, hvl, set, voorkomen):
+def pc_raden(pogingen, eigencode, index, set, voorkomen):
     randcode = []
     terug = []
 
-    if hvl <= 5 and sum(voorkomen.values()) < 4:
+    if index <= 5 and sum(voorkomen.values()) < 4:
         print(index)
         while len(randcode) != 4:
             randcode.append(kegels[index])
 
+        pogingen += 1
         if randcode == eigencode:
-            print('Helaas, de computer heeft het goed geraden in ' + str(pogingen) + ' pogingen.')
+            print('Helaas, de computer heeft het goed geraden in ' + str(pogingen) + ' pogingen.' + '\n')
             gamemode()
 
         for i in range(0, len(randcode)):
@@ -160,22 +123,20 @@ def pc_raden(pogingen, eigencode, index, hvl, set, voorkomen):
                 terug.append('geen kegel')
         random.shuffle(terug)
         set.append(randcode)
-        hvl += 1
         if terug.count('geen kegel') == 4:
             index += 1
-            pogingen += 1
-            pc_raden(pogingen, eigencode, index, hvl, set, voorkomen)
+            pc_raden(pogingen, eigencode, index, set, voorkomen)
         else:
             voorkomen[kegels[index]] = terug.count('zwarte pin')
             index += 1
-            pogingen += 1
-            pc_raden(pogingen, eigencode, index, hvl, set, voorkomen)
+            pc_raden(pogingen, eigencode, index, set, voorkomen)
     else:
         lager(eigencode, pogingen, set, voorkomen)
 
 
 def lager(eigencode, pogingen, set, voorkomen):
     lst = []
+    # if len(voorkomen.keys()) == 4:
     for i in voorkomen:
         for a in range(0, voorkomen[i]):
             lst.append(i)
@@ -185,12 +146,19 @@ def lager(eigencode, pogingen, set, voorkomen):
     if lst in set:
         lager(eigencode, pogingen, set, voorkomen)
     else:
+        pogingen += 1
         print(lst)
         set.append(lst)
         if lst == eigencode:
-            print('helaas het is geraden in ' + str(pogingen) + ' pogingen' + '\n')
+            if pogingen >= 11:
+                print('gefeliciteerd, de computer heeft je code niet in 10 pogingen kunnen raden.')
+                print('De computer deed er ' + str(pogingen) + ' pogingen over.' + '\n')
+            else:
+                print('Helaas, de computer heeft het goed geraden in ' + str(pogingen) + ' pogingen.' + '\n')
             gamemode()
         else:
-            pogingen += 1
             lager(eigencode, pogingen, set, voorkomen)
+#
+# def feedback():
+
 gamemode()
