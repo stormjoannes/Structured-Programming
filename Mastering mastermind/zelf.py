@@ -158,7 +158,4 @@ def lager(eigencode, pogingen, set, voorkomen):
             gamemode()
         else:
             lager(eigencode, pogingen, set, voorkomen)
-#
-# def feedback():
-
 gamemode()
