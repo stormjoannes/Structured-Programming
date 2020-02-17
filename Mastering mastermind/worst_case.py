@@ -82,23 +82,48 @@ def pc_raden(pogingen, set, eigencode):
             print('Deze codecombinatie bestaat niet, probeer het opnieuw.')
 
 
-    uitkomsten = [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 1], [1, 2], [1, 3], [2, 0], [2, 1], [2, 2],
-                  [3, 0], [4, 0]]
 
-    tussen = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    while len(set) > 0:
+        uitkomsten = ['0, 0', '0, 1', '0, 2', '0, 3', '0, 4', '1, 0', '1, 1', '1, 2', '1, 3', '2, 0', '2, 1', '2, 2',
+                      '3, 0', '4, 0']
 
-    worst_case = '1000'
+        worst_case = '1000'
+        combo = 'hu'
 
-    for i in set:
-        for x in set:
-            comment = feedback(str(i), str(x))
-            print(comment)
-            for y in range(0, len(uitkomsten)):
-                if uitkomsten[y] == comment:
-                    tussen[y] += 1
+        for i in set:
+            tussen = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            for x in set:
+                comment = feedback(str(i), str(x))
+                for y in range(0, len(uitkomsten)):
+                    if uitkomsten[y] == comment:
+                        tussen[y] += 1
+            print(tussen, i)
             if max(tussen) < int(worst_case):
                 worst_case = max(tussen)
-    print(worst_case)
+                combo = i
+        print(worst_case)
+        print(combo)
+
+        print(set, 'set')
+        print(len(set))
+        guess = combo
+        print(guess)
+        pogingen += 1
+        if guess == eigencode:
+            break
+        reflectie = feedback(eigencode, guess)
+        memorie = []
+        print('gok ' + str(pogingen) + ': ' + str(guess))
+        for i in set:
+            if feedback(guess, i) == reflectie:
+                memorie.append(i)
+        set = memorie
+    if pogingen > 10:
+        print('Gefeliciteerd de computer heeft het niet binnen 10 pogingen geraden!')
+
+        print('De computer heeft er ' + str(pogingen) + ' over gedaan' + '\n')
+    else:
+        print('Helaas, de computer heeft het in ' + str(pogingen) + ' pogingen geraden!' + '\n')
 
     gamemode()
 
@@ -106,11 +131,9 @@ def pc_raden(pogingen, set, eigencode):
 def feedback(code, poging):
     feedback = []
     for i in range(0, len(poging)):
-        print(poging, 'poging')
-        print(code, 'code')
         if poging[i] == code[i]:
             feedback.append('zwart')
-        elif poging in code[i]:
+        elif poging[i] in code:
             feedback.append('wit')
     return str(feedback.count('zwart')) + ', ' + str(feedback.count('wit'))
 
