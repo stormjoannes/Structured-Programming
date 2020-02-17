@@ -1,5 +1,12 @@
 import random
 
+st = ''
+set = []
+for i in range(1111, 6667):
+    st = str(i)
+    if '0' not in st and '7' not in st and '8' not in st and '9' not in st:
+        set.append(st)
+
 gespeeld = input('Heb je dit spel al een keer gespeeld [Y/N]: ').lower()
 if 'n' == gespeeld:
     spelregels = '---SPELREGELS---' + \
@@ -67,19 +74,11 @@ def code_breken(pogingen, codes):
 
 
 def pc_raden(pogingen, set, eigencode):
-    st = ''
-    set = []
-    for i in range(1111, 6667):
-        st = str(i)
-        if '0' not in st and '7' not in st and '8' not in st and '9' not in st:
-            set.append(st)
-    copy = set
-
     while eigencode not in set:
         eigencode = input('Wat is de code:  ')
         eigencode = eigencode.strip()
         if eigencode not in set:
-            print('Deze kleur codecombinatie bestaat niet, probeer het opnieuw.')
+            print('Deze codecombinatie bestaat niet, probeer het opnieuw.')
 
     while len(set) > 0:
         guess = set[0]
