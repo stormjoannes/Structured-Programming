@@ -103,7 +103,6 @@ def pc_raden(pogingen, set, eigencode):
                 combo = i
         print(worst_case)
         print(combo)
-
         print(set, 'set')
         print(len(set))
         guess = combo
