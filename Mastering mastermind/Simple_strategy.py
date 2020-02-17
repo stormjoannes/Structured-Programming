@@ -40,7 +40,6 @@ def gamemode():
 def code_breken(pogingen, codes):
     if len(codes) < 4:
         codes = random.choice(set)
-
     print('Je hebt nog ' + str(11 - pogingen) + ' pogingen over.')
 
     poging = ''
@@ -95,7 +94,7 @@ def pc_raden(pogingen, set, eigencode):
                 memorie.append(i)
         set = memorie
     if pogingen > 10:
-        print('Gefeliciteerd de computer heeft het niet binnen 10 pogingen geraden!')cmd
+        print('Gefeliciteerd de computer heeft het niet binnen 10 pogingen geraden!')
 
         print('De computer heeft er ' + str(pogingen) + ' over gedaan' + '\n')
     else:
