@@ -138,7 +138,7 @@ def pc_raden(pogingen, set):
             gamemode()
     gamemode()
 
-
+#Deze functie is deels in samenwerking met Brandon Betz
 def feedback(code, poging):
     temp = []
     feedback = []

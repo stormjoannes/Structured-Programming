@@ -86,7 +86,7 @@ def code_breken(pogingen, codes):
         else:
             code_breken(pogingen, codes)
 
-
+#bron: 'YET ANOTHER MASTERMIND STRATEGY from Barteld Kooi, Department of Philosophy, University of Groningen, The Netherlands
 def pc_raden(pogingen, set):
     eigencode = inp()
 
@@ -128,7 +128,7 @@ def pc_raden(pogingen, set):
         print('Helaas, de computer heeft het in ' + str(pogingen) + ' pogingen geraden!' + '\n')
     gamemode()
 
-
+#Deze functie is deels in samenwerking met Brandon Betz
 def feedback(code, poging):
     temp = []
     feedback = []
