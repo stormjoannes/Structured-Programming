@@ -17,4 +17,4 @@ def feedback(code, poging):
     print(temp)
     return str(feedback.count('zwart')) + ', ' + str(feedback.count('wit'))
 
-print(feedback('6842', '1111'))
+print(feedback('3432', '3624'))

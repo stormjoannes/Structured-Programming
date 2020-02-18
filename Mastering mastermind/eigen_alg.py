@@ -8,7 +8,6 @@ for i in range(1111, 6667):
         set.append(st)
 code = []
 hat = []
-index = 0
 voorkomen = {}
 
 gespeeld = input('Heb je dit spel al een keer gespeeld [Y/N]: ').lower()
@@ -47,18 +46,23 @@ def gamemode():
         print('dat is geen bestaande gamemode, probeer het opnieuw')
         gamemode()
 
-
-def code_breken(pogingen, codes):
-    if len(codes) < 4:
-        codes = random.choice(set)
-    print('Je hebt nog ' + str(11 - pogingen) + ' pogingen over.')
-
+def inp():
     poging = ''
     while poging not in set:
         poging = input('Wat is de code:  ')
         poging = poging.strip()
         if poging not in set:
-            print('Deze kleur codecombinatie bestaat niet, probeer het opnieuw.')
+            print('Deze codecombinatie bestaat niet, probeer het opnieuw.')
+    return poging
+
+
+def code_breken(pogingen, codes):
+    if len(codes) < 4:
+        codes = random.choice(set)
+    print('Je hebt nog ' + str(10 - pogingen) + ' pogingen over.')
+    pogingen += 1
+
+    poging = inp()
 
     if poging == codes:
         print('Gefeliciteerd je hebt het goed geraden')
@@ -66,10 +70,8 @@ def code_breken(pogingen, codes):
         gamemode()
     else:
         terugslag = feedback(codes, poging)
-        print(terugslag)
-        pogingen += 1
 
-        if pogingen == 11:
+        if pogingen == 10:
             print('Helaas je hebt de code niet kunnen kraken in 10 pogingen' + '\n')
             print('De code was ' + str(codes))
             gamemode()
@@ -78,8 +80,9 @@ def code_breken(pogingen, codes):
 
 
 def pc_raden(pogingen, set, eigencode):
+    index = 0
     while eigencode not in set:
-        eigencode = input('Wat is de code:  ')
+        eigencode = inp()
         eigencode = eigencode.strip()
         if eigencode not in set:
             print('Deze codecombinatie bestaat niet, probeer het opnieuw.')
@@ -88,43 +91,38 @@ def pc_raden(pogingen, set, eigencode):
     lst = []
     while index <= 5 and sum(voorkomen.values()) < 4:
         for i in range(1, 7):
-            print(randcode, 'randcodeeeeeeeee')
             while len(randcode) < 4:
                 randcode.append(str(i))
 
+            index += 1
             pogingen += 1
+            print('Gok ' + str(pogingen) + ': ' + str(''.join(randcode)))
             if randcode == eigencode:
                 print('Helaas, de computer heeft het goed geraden in ' + str(pogingen) + ' pogingen.' + '\n')
                 gamemode()
 
             rand_2 = ''.join(randcode)
             reflectie = feedback(eigencode, str(rand_2))
-            print(reflectie)
             hat.append(rand_2)
-
-            print(reflectie, 'reflectieeeeeee')
             if reflectie != '0, 0':
-                print('dagggggggggggggggg')
                 voorkomen[i] = int(reflectie[0])
-                print(voorkomen)
             randcode.clear()
 
     lst_2 = ''
     lst = []
     while lst_2 != eigencode:
         lst.clear()
-        print(lst_2)
         for h in voorkomen:
             for a in range(0, voorkomen[h]):
                 lst.append(str(h))
         random.shuffle(lst)
         lst_2 = ''.join(lst)
         while lst_2 in hat:
-            print(lst_2, 'whileeeeeeeeeee')
             random.shuffle(lst)
             lst_2 = ''.join(lst)
         pogingen += 1
         hat.append(lst_2)
+        print('Gok ' + str(pogingen) + ': ' + str(lst_2))
         if lst_2 == eigencode:
             if pogingen >= 11:
                 print('gefeliciteerd, de computer heeft je code niet in 10 pogingen kunnen raden.')
@@ -132,12 +130,6 @@ def pc_raden(pogingen, set, eigencode):
             else:
                 print('Helaas, de computer heeft het goed geraden in ' + str(pogingen) + ' pogingen.' + '\n')
             gamemode()
-
-
-
-
-
-
     gamemode()
 
 
@@ -145,7 +137,6 @@ def feedback(code, poging):
     temp = []
     feedback = []
     for i in range(0, len(poging)):
-        print(poging[i])
         if poging[i] == code[i]:
             e = str(poging[i]) + ':' + 'zwart'
             temp.append(e)

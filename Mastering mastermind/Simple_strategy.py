@@ -43,17 +43,25 @@ def gamemode():
         gamemode()
 
 
-def code_breken(pogingen, codes):
-    if len(codes) < 4:
-        codes = random.choice(set)
-    print('Je hebt nog ' + str(11 - pogingen) + ' pogingen over.')
-
+def inp():
     poging = ''
     while poging not in set:
         poging = input('Wat is de code:  ')
         poging = poging.strip()
         if poging not in set:
-            print('Deze kleur codecombinatie bestaat niet, probeer het opnieuw.')
+            print('Deze codecombinatie bestaat niet, probeer het opnieuw.')
+    return poging
+
+
+def code_breken(pogingen, codes):
+    if len(codes) < 4:
+        codes = random.choice(set)
+    print('Je hebt nog ' + str(10 - pogingen) + ' pogingen over.')
+    pogingen += 1
+
+    poging = inp()
+    print(poging)
+
 
     if poging == codes:
         print('Gefeliciteerd je hebt het goed geraden')
@@ -62,9 +70,8 @@ def code_breken(pogingen, codes):
     else:
         terugslag = feedback(codes, poging)
         print(terugslag)
-        pogingen += 1
 
-        if pogingen == 11:
+        if pogingen == 10:
             print('Helaas je hebt de code niet kunnen kraken in 10 pogingen' + '\n')
             print('De code was ' + str(codes))
             gamemode()
@@ -74,7 +81,7 @@ def code_breken(pogingen, codes):
 
 def pc_raden(pogingen, set, eigencode):
     while eigencode not in set:
-        eigencode = input('Wat is de code:  ')
+        eigencode = inp()
         eigencode = eigencode.strip()
         if eigencode not in set:
             print('Deze codecombinatie bestaat niet, probeer het opnieuw.')
@@ -84,9 +91,7 @@ def pc_raden(pogingen, set, eigencode):
         guess = set[0]
         pogingen += 1
         print('gok ' + str(pogingen) + ': ' + str(guess))
-        print(set)
         if guess == eigencode:
-            print('daag')
             break
         reflectie = feedback(eigencode, guess)
 
@@ -95,7 +100,6 @@ def pc_raden(pogingen, set, eigencode):
             if feedback(guess, i) == reflectie:
                 memorie.append(i)
         set = memorie
-        print(len(set), 'lennnnnnnn')
     if pogingen > 10:
         print('Gefeliciteerd de computer heeft het niet binnen 10 pogingen geraden!')
 
