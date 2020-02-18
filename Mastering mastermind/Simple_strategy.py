@@ -84,7 +84,9 @@ def pc_raden(pogingen, set, eigencode):
         guess = set[0]
         pogingen += 1
         print('gok ' + str(pogingen) + ': ' + str(guess))
+        print(set)
         if guess == eigencode:
+            print('daag')
             break
         reflectie = feedback(eigencode, guess)
 
@@ -93,6 +95,7 @@ def pc_raden(pogingen, set, eigencode):
             if feedback(guess, i) == reflectie:
                 memorie.append(i)
         set = memorie
+        print(len(set), 'lennnnnnnn')
     if pogingen > 10:
         print('Gefeliciteerd de computer heeft het niet binnen 10 pogingen geraden!')
 
@@ -113,12 +116,9 @@ def feedback(code, poging):
     for i in range(0, len(poging)):
         if poging[i] in code:
             d = str(poging[i]) + ':' + 'wit'
-            print(temp.count(str(poging[i]) + ':' + 'zwart') < code.count(poging[i]))
-            if temp.count(str(poging[i]) + ':' + 'zwart') < code.count(poging[i]) and temp.count(str(poging[i]) + ':' + 'zwart') < poging.count(poging[i]):
-                print(temp)
+            if d not in temp and temp.count(str(poging[i]) + ':' + 'zwart') < code.count(poging[i]) and temp.count(str(poging[i]) + ':' + 'zwart') < poging.count(poging[i]):
                 temp.append(d)
                 feedback.append('wit')
-    print(temp)
     return str(feedback.count('zwart')) + ', ' + str(feedback.count('wit'))
 
 gamemode()
