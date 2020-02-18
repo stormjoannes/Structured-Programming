@@ -30,7 +30,7 @@ elif 'y' == gespeeld:
 
 
 def gamemode():
-    pogingen = 1
+    pogingen = 0
     modus = input('Wil je de Code maken of breken: ').lower()
     if 'breken' in modus:
         print('De te raden getallen zijn: ' + '1 t/m 6. ')
@@ -83,11 +83,11 @@ def pc_raden(pogingen, set, eigencode):
     while len(set) > 0:
         guess = set[0]
         pogingen += 1
+        print('gok ' + str(pogingen) + ': ' + str(guess))
         if guess == eigencode:
             break
         reflectie = feedback(eigencode, guess)
         memorie = []
-        print('gok ' + str(pogingen) + ': ' + str(guess))
         for i in set:
             if feedback(guess, i) == reflectie:
                 memorie.append(i)
@@ -95,7 +95,7 @@ def pc_raden(pogingen, set, eigencode):
     if pogingen > 10:
         print('Gefeliciteerd de computer heeft het niet binnen 10 pogingen geraden!')
 
-        print('De computer heeft er ' + str(pogingen) + ' over gedaan' + '\n')
+        print('De computer heeft er ' + str(pogingen) + ' pogingen over gedaan' + '\n')
     else:
         print('Helaas, de computer heeft het in ' + str(pogingen) + ' pogingen geraden!' + '\n')
     gamemode()

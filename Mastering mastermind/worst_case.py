@@ -30,7 +30,7 @@ elif 'y' == gespeeld:
 
 
 def gamemode():
-    pogingen = 1
+    pogingen = 0
     modus = input('Wil je de Code maken of breken: ').lower()
     if 'breken' in modus:
         print('De te raden getallen zijn: ' + '1 t/m 6. ')
@@ -97,17 +97,12 @@ def pc_raden(pogingen, set, eigencode):
                 for y in range(0, len(uitkomsten)):
                     if uitkomsten[y] == comment:
                         tussen[y] += 1
-            print(tussen, i)
             if max(tussen) < int(worst_case):
                 worst_case = max(tussen)
                 combo = i
-        print(worst_case)
-        print(combo)
-        print(set, 'set')
-        print(len(set))
         guess = combo
-        print(guess)
         pogingen += 1
+        print('gok ' + str(pogingen) + ': ' + guess)
         if guess == eigencode:
             break
         reflectie = feedback(eigencode, guess)
@@ -123,7 +118,6 @@ def pc_raden(pogingen, set, eigencode):
         print('De computer heeft er ' + str(pogingen) + ' over gedaan' + '\n')
     else:
         print('Helaas, de computer heeft het in ' + str(pogingen) + ' pogingen geraden!' + '\n')
-
     gamemode()
 
 
@@ -132,7 +126,7 @@ def feedback(code, poging):
     for i in range(0, len(poging)):
         if poging[i] == code[i]:
             feedback.append('zwart')
-        elif poging[i] in code:
+        elif poging in code[i]:
             feedback.append('wit')
     return str(feedback.count('zwart')) + ', ' + str(feedback.count('wit'))
 
