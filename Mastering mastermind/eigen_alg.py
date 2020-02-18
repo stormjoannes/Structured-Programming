@@ -10,38 +10,47 @@ code = []
 hat = []
 voorkomen = {}
 
-gespeeld = input('Heb je dit spel al een keer gespeeld [Y/N]: ').lower()
-if 'n' == gespeeld:
-    spelregels = '---SPELREGELS---' + \
-                 '\n' + \
-                 'Er zijn 6 verschillen kleuren pionnen waar je uit kunt kiezen: blauw, Wit, rood en zwart.' + \
-                 '\n' + \
-                 'Je hebt 10 beurten om het goed te raden, haal je ndit niet heb je verloren.' + \
-                 '\n' + \
-                 'Zodra een pion op de goede plek staat en de goede kleur is komt er een zwart pinnetje te staan.' + \
-                 '\n' + \
-                 'Zodra een pion niet op de goede plek staat, maar de kleur wel in de code voorkomt.' + \
-                 'Krijg je een wit pinnejte erbij.' + \
-                 '\n' + \
-                 'Als je de code hebt geraden heb je gewonnen.' + \
-                 '\n' + \
-                 'Hoe minder pogingen je er over doet, hoe beter je bent.' + \
-                 '\n'
-    print(spelregels)
-elif 'y' == gespeeld:
-    print('\n')
+def spelregels():
+    gespeeld = input('Heb je dit spel al een keer gespeeld [Y/N]: ').lower()
+    if 'n' == gespeeld:
+        regels = '---SPELREGELS---' + \
+                     '\n' + \
+                     'Er zijn 6 verschillen getallen waar je uit kunt kiezen, 1 t/m 6.' + \
+                     '\n' + \
+                     'Je hebt 10 beurten om het goed te raden, haal je ndit niet heb je verloren.' + \
+                     '\n' + \
+                     'Zodra een getal op de goede plek staat en het goede getal is komt er een zwart pinnetje te staan.' + \
+                     '\n' + \
+                     'Zodra een getal niet op de goede plek staat, maar als het getal wel in de code voorkomt ' + \
+                     'krijg je een wit pinnetje erbij.' + \
+                     '\n' + \
+                     'Als je de code hebt geraden heb je gewonnen.' + \
+                     '\n' + \
+                     'Hoe minder pogingen je er over doet, hoe beter je bent.' + \
+                     '\n' + \
+                     'Van de feedback is het eerste getal de zwarte pion en het tweede getal de witte pion. ' + \
+                     '\n' + \
+                     'Bijv: 1, 2. Dit betekent 1 zwarte pion en 2 witte pionnen.' + \
+                     '\n'
+        print(regels)
+        gamemode()
+    elif 'y' == gespeeld:
+        print('\n')
+        gamemode()
+    else:
+        print('Dit is geen geldige optie, probeer het opnieuw.' + '\n')
+        spelregels()
 
 
 def gamemode():
     pogingen = 0
-    modus = input('Wil je de Code maken of breken: ').lower()
+    modus = input('Wil je de code maken of breken: ').lower()
     if 'breken' in modus:
         print('De te raden getallen zijn: ' + '1 t/m 6. ')
         code = []
         code_breken(pogingen, code)
     elif 'maken' in modus:
-        eigencode = ''
-        pc_raden(pogingen, set, eigencode)
+        pc_raden(pogingen, set)
     else:
         print('dat is geen bestaande gamemode, probeer het opnieuw')
         gamemode()
@@ -70,22 +79,19 @@ def code_breken(pogingen, codes):
         gamemode()
     else:
         terugslag = feedback(codes, poging)
+        print('Feedback: ' + str(terugslag))
 
         if pogingen == 10:
-            print('Helaas je hebt de code niet kunnen kraken in 10 pogingen' + '\n')
-            print('De code was ' + str(codes))
+            print('Helaas je hebt de code niet kunnen kraken in 10 pogingen')
+            print('De code was ' + str(codes) + '\n')
             gamemode()
         else:
             code_breken(pogingen, codes)
 
 
-def pc_raden(pogingen, set, eigencode):
+def pc_raden(pogingen, set):
     index = 0
-    while eigencode not in set:
-        eigencode = inp()
-        eigencode = eigencode.strip()
-        if eigencode not in set:
-            print('Deze codecombinatie bestaat niet, probeer het opnieuw.')
+    eigencode = inp()
 
     randcode = []
     lst = []
@@ -148,5 +154,4 @@ def feedback(code, poging):
                 temp.append(d)
                 feedback.append('wit')
     return str(feedback.count('zwart')) + ', ' + str(feedback.count('wit'))
-
-gamemode()
+spelregels()
