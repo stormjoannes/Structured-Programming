@@ -82,7 +82,6 @@ def pc_raden(pogingen, set, eigencode):
             print('Deze codecombinatie bestaat niet, probeer het opnieuw.')
 
 
-
     while len(set) > 0:
         uitkomsten = ['0, 0', '0, 1', '0, 2', '0, 3', '0, 4', '1, 0', '1, 1', '1, 2', '1, 3', '2, 0', '2, 1', '2, 2',
                       '3, 0', '4, 0']
@@ -122,12 +121,19 @@ def pc_raden(pogingen, set, eigencode):
 
 
 def feedback(code, poging):
+    temp = []
     feedback = []
     for i in range(0, len(poging)):
         if poging[i] == code[i]:
+            e = str(poging[i]) + ':' + 'zwart'
+            temp.append(e)
             feedback.append('zwart')
-        elif poging in code[i]:
-            feedback.append('wit')
+    for i in range(0, len(poging)):
+        if poging[i] in code:
+            d = str(poging[i]) + ':' + 'wit'
+            if d not in temp and temp.count(str(poging[i]) + ':' + 'zwart') < code.count(poging[i]) and temp.count(str(poging[i]) + ':' + 'zwart') < poging.count(poging[i]):
+                temp.append(d)
+                feedback.append('wit')
     return str(feedback.count('zwart')) + ', ' + str(feedback.count('wit'))
 
 gamemode()
