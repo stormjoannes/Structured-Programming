@@ -131,7 +131,7 @@ def feedback(code, poging):
     for i in range(0, len(poging)):
         if poging[i] in code:
             d = str(poging[i]) + ':' + 'wit'
-            if d not in temp and temp.count(str(poging[i]) + ':' + 'zwart') < code.count(poging[i]) and temp.count(str(poging[i]) + ':' + 'zwart') < poging.count(poging[i]):
+            if temp.count(str(poging[i]) + ':' + 'zwart') < code.count(poging[i]) and temp.count(str(poging[i]) + ':' + 'zwart') < poging.count(poging[i]):
                 temp.append(d)
                 feedback.append('wit')
     return str(feedback.count('zwart')) + ', ' + str(feedback.count('wit'))

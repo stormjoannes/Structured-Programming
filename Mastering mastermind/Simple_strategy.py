@@ -6,7 +6,6 @@ for i in range(1111, 6667):
     st = str(i)
     if '0' not in st and '7' not in st and '8' not in st and '9' not in st:
         set.append(st)
-
 gespeeld = input('Heb je dit spel al een keer gespeeld [Y/N]: ').lower()
 if 'n' == gespeeld:
     spelregels = '---SPELREGELS---' + \
@@ -82,35 +81,18 @@ def pc_raden(pogingen, set, eigencode):
 
 
     while len(set) > 0:
-        # print(set, 'setttttt')
-        # print(len(set), 'lengteeeeeeee')
-        # guess = random.choice(set)
         guess = set[0]
         pogingen += 1
         print('gok ' + str(pogingen) + ': ' + str(guess))
         if guess == eigencode:
-            print('hoi')
             break
         reflectie = feedback(eigencode, guess)
 
         memorie = []
-        print('mem cleared')
-        print(memorie)
         for i in set:
-            # print('hoi')
-            print(guess, 'guess')
-            print(i, 'i')
-            print(feedback(guess, i), 'gokkkkkkkkk')
-            print(reflectie, 'reflectieeeeeee')
             if feedback(guess, i) == reflectie:
-                # print('doeiy')
                 memorie.append(i)
-                print(memorie, 'geheugennnnnnnnnn')
-        # print(memorie, 'memorieeeeeeeeee')
         set = memorie
-        print(set)
-        print('herhaal')
-        print(len(set), 'lengteeeeeeee')
     if pogingen > 10:
         print('Gefeliciteerd de computer heeft het niet binnen 10 pogingen geraden!')
 
@@ -132,7 +114,7 @@ def feedback(code, poging):
         if poging[i] in code:
             d = str(poging[i]) + ':' + 'wit'
             print(temp.count(str(poging[i]) + ':' + 'zwart') < code.count(poging[i]))
-            if d not in temp and temp.count(str(poging[i]) + ':' + 'zwart') < code.count(poging[i]) and temp.count(str(poging[i]) + ':' + 'zwart') < poging.count(poging[i]):
+            if temp.count(str(poging[i]) + ':' + 'zwart') < code.count(poging[i]) and temp.count(str(poging[i]) + ':' + 'zwart') < poging.count(poging[i]):
                 print(temp)
                 temp.append(d)
                 feedback.append('wit')

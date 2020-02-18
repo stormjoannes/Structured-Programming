@@ -17,16 +17,4 @@ def feedback(code, poging):
     print(temp)
     return str(feedback.count('zwart')) + ', ' + str(feedback.count('wit'))
 
-# print(feedback('2222', '2232'))
-print(feedback('4321', '3213'))
-# print(feedback('1111', '2262'))
-
-
-# def feedback(code, poging):
-#     feedback = []
-#     for i in range(0, len(poging)):
-#         if poging[i] == code[i]:
-#             feedback.append('zwart')
-#         elif poging in code[i]:
-#             feedback.append('wit')
-#     return str(feedback.count('zwart')) + ', ' + str(feedback.count('wit'))
+print(feedback('4381', '1111'))
