@@ -8,6 +8,7 @@ for i in range(1111, 6667):
         set.append(st)
 
 def spelregels():
+    "'Deze functie heb ik om het wat meer op een spel te laten lijken, hierin kun je de spelregels krijgen als je het spel nog nooit hebt gespeeld.'"
     gespeeld = input('Heb je dit spel al een keer gespeeld [Y/N]: ').lower()
     if 'n' == gespeeld:
         regels = '---SPELREGELS---' + \
@@ -40,6 +41,7 @@ def spelregels():
 
 
 def gamemode():
+    "'In deze functie kies ik of ik de code wil raden of de computer de code wil laten raden.'"
     pogingen = 0
     modus = input('Wil je de code maken of breken: ').lower()
     if 'breken' in modus:
@@ -54,6 +56,7 @@ def gamemode():
 
 
 def inp():
+    "'In deze functie voer ik in wat mijn gok is of wat de code moet zijn.'"
     poging = ''
     while poging not in set:
         poging = input('Wat is de code:  ')
@@ -64,6 +67,7 @@ def inp():
 
 
 def code_breken(pogingen, codes):
+    "'In deze functie raad ik zelf de code.'"
     if len(codes) < 4:
         codes = random.choice(set)
     print('Je hebt nog ' + str(10 - pogingen) + ' pogingen over.')
@@ -88,6 +92,7 @@ def code_breken(pogingen, codes):
 
 #bron: 'YET ANOTHER MASTERMIND STRATEGY from Barteld Kooi, Department of Philosophy, University of Groningen, The Netherlands
 def pc_raden(pogingen, set):
+    "'In deze functie staat het worst case strategy algorithme.'"
     eigencode = inp()
 
 
@@ -130,6 +135,7 @@ def pc_raden(pogingen, set):
 
 #Deze functie is deels in samenwerking met Brandon Betz
 def feedback(code, poging):
+    "'In deze functie geef ik hoeveel zwarte pionnen en hoeveel witte pionnen er terugkomen bij de vergelijking van de 2 parameters.'"
     temp = []
     feedback = []
     for i in range(0, len(poging)):
